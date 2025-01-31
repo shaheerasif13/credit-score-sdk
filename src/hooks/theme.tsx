@@ -14,6 +14,7 @@ const defaultTheme: Theme = {
     Excellent: { min: 800, max: 850, color: "#7c3aed" }, // Purple
   },
   locale: "en-US",
+  icon: <CircleStack className="w-8 h-8" style={{ color: "#6b7280" }} />,
 };
 
 const ThemeContext = createContext<Theme>(defaultTheme);
