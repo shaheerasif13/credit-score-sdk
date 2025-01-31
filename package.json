@@ -8,6 +8,7 @@
   "types": "dist/index.d.ts",
   "styles": "styles.css",
   "scripts": {
+    "dev": "rollup -cw --bundleConfigAsCjs",
     "build": "rollup -c --bundleConfigAsCjs"
   },
   "author": "",
