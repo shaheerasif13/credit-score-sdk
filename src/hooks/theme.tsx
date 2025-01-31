@@ -14,7 +14,6 @@ const defaultTheme: Theme = {
     Excellent: { min: 800, max: 850, color: "#7c3aed" }, // Purple
   },
   locale: "en-US",
-  icon: <CircleStack className="w-7 h-7" style={{ color: "#6b7280" }} />,
 };
 
 const ThemeContext = createContext<Theme>(defaultTheme);
@@ -23,7 +22,18 @@ export const ThemeProvider: React.FC<{
   theme?: Partial<Theme>;
   children: React.ReactNode;
 }> = ({ theme, children }) => {
-  const mergedTheme = { ...defaultTheme, ...theme };
+  const mergedTheme = {
+    ...defaultTheme,
+    ...theme,
+    icon: theme?.icon ? (
+      theme.icon
+    ) : (
+      <CircleStack
+        className="w-8 h-8"
+        style={{ color: theme?.primaryColor || defaultTheme.primaryColor }}
+      />
+    ),
+  };
   return (
     <ThemeContext.Provider value={mergedTheme}>
       {children}

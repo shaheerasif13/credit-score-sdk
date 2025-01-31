@@ -29,10 +29,14 @@ const CreditScoreSimulator = () => {
   return (
     <div className="min-h-screen bg-gray-200 flex items-center justify-center p-10">
       <div className="bg-white rounded-3xl shadow-lg p-8 w-full max-w-lg">
-        <h1 className="text-[28px] font-semibold text-center text-gray-800 mb-2 flex justify-center items-center gap-1">
-          {icon}
-          Credit Score Simulator
-        </h1>
+        <div className="text-[28px] font-semibold text-center text-gray-800 mb-2 flex justify-center items-center gap-1">
+          {typeof icon === "string" ? (
+            <img src={icon} alt="icon" className="w-7 h-7" />
+          ) : (
+            icon
+          )}
+          <h1>Credit Score Simulator</h1>
+        </div>
         <CreditScoreDisplay score={creditScore} />
         <div className="space-y-6">
           <RangeSlider
