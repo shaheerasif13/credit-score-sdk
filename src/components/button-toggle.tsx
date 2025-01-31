@@ -1,3 +1,5 @@
+import { useTheme } from "../hooks/theme";
+
 interface ButtonToggleProps {
   label: string;
   options: { label: string; value: string | number }[];
@@ -11,6 +13,8 @@ const ButtonToggle: React.FC<ButtonToggleProps> = ({
   selectedValue,
   onChange,
 }) => {
+  const theme = useTheme();
+
   return (
     <div>
       <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -23,9 +27,15 @@ const ButtonToggle: React.FC<ButtonToggleProps> = ({
             onClick={() => onChange(option.value)}
             className={`px-6 py-2.5 rounded-lg transition-all duration-300 text-sm ${
               selectedValue === option.value
-                ? "bg-gray-500 text-white"
-                : "bg-gray-100 text-gray-600"
+                ? "text-white" // Selected state
+                : "text-gray-100" // Default state
             }`}
+            style={{
+              backgroundColor:
+                selectedValue === option.value
+                  ? theme.primaryColor // Selected state
+                  : theme.secondaryColor, // Default state
+            }}
           >
             {option.label}
           </button>

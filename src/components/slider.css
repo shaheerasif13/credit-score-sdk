@@ -1,6 +1,7 @@
 /* Source: https://www.cssportal.com/style-input-range/ */
 /* Added support for custom theme colors */
 
+/* These variables would be dynamically set from theme context */
 :root {
   --slider-track-color: #6b7280; /* Tailwind's gray-500 */
   --slider-thumb-color: #a1a1aa; /* Lighter gray for thumb */

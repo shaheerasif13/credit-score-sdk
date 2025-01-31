@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CreditScoreInputs, PaymentHistory } from "../share/types";
 import { calculateCreditScore } from "../share/utils";
 import CreditScoreDisplay from "./credit-score-display";
@@ -9,22 +9,20 @@ import Slider from "./slider";
 const CreditScoreSimulator = () => {
   const [creditScoreInputs, setCreditScoreInputs] = useState<CreditScoreInputs>(
     {
-      creditUtilization: 30,
+      creditUtilization: 0,
       paymentHistory: PaymentHistory.OnTime,
       newCreditApplications: 0,
-      creditAge: 5,
-      debtToIncomeRatio: 20,
+      creditAge: 0,
+      debtToIncomeRatio: 0,
     }
   );
-  const creditScore = calculateCreditScore(creditScoreInputs);
-  const getScoreRange = (score: number) => {
-    if (score >= 800) return { label: "Excellent", color: "text-green-600" };
-    if (score >= 740) return { label: "Very Good", color: "text-blue-500" };
-    if (score >= 670) return { label: "Good", color: "text-green-500" };
-    if (score >= 580) return { label: "Fair", color: "text-yellow-500" };
-    return { label: "Poor", color: "text-red-500" };
-  };
-  const scoreRange = getScoreRange(creditScore);
+  const [creditScore, setCreditScore] = useState<number>(
+    calculateCreditScore(creditScoreInputs)
+  );
+
+  useEffect(() => {
+    setCreditScore(calculateCreditScore(creditScoreInputs));
+  }, [creditScoreInputs]);
 
   return (
     <div className="min-h-screen bg-gray-200 flex items-center justify-center p-10">
@@ -32,15 +30,7 @@ const CreditScoreSimulator = () => {
         <h1 className="text-[28px] font-semibold text-center text-gray-800 mb-2">
           Credit Score Simulator
         </h1>
-
-        {/* Credit Score Display */}
-        <CreditScoreDisplay
-          score={creditScore}
-          scoreLabel={scoreRange.label}
-          color={scoreRange.color}
-        />
-
-        {/* Controls */}
+        <CreditScoreDisplay score={creditScore} />
         <div className="space-y-6">
           <Slider
             label="Credit Utilization"
@@ -55,7 +45,6 @@ const CreditScoreSimulator = () => {
             }
             unit="%"
           />
-
           <ButtonToggle
             label="Payment History"
             options={[
@@ -70,7 +59,6 @@ const CreditScoreSimulator = () => {
               })
             }
           />
-
           <NumberInput
             label="New Credit Applications"
             value={creditScoreInputs.newCreditApplications}
@@ -82,7 +70,6 @@ const CreditScoreSimulator = () => {
               })
             }
           />
-
           <Slider
             label="Credit Age"
             value={creditScoreInputs.creditAge}
@@ -96,7 +83,6 @@ const CreditScoreSimulator = () => {
             }
             unit="years"
           />
-
           <Slider
             label="Debt-to-Income Ratio"
             value={creditScoreInputs.debtToIncomeRatio}

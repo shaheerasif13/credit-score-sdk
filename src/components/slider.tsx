@@ -1,5 +1,5 @@
-import React from 'react';
-import './slider.css';  // Import the custom CSS file
+import { useEffect } from "react";
+import { useTheme } from "../hooks/theme";
 
 interface SliderProps {
   label: string;
@@ -7,7 +7,7 @@ interface SliderProps {
   min: number;
   max: number;
   onChange: (value: number) => void;
-  unit?: string; // Optional unit (like % or years)
+  unit?: string;
 }
 
 const Slider: React.FC<SliderProps> = ({
@@ -18,6 +18,17 @@ const Slider: React.FC<SliderProps> = ({
   onChange,
   unit,
 }) => {
+  const theme = useTheme();
+
+  // Dynamically update CSS variables based on the theme
+  useEffect(() => {
+    const slider = document.documentElement; // Apply to the root element
+    slider.style.setProperty("--slider-track-color", theme.primaryColor);
+    slider.style.setProperty("--slider-thumb-color", theme.secondaryColor);
+    slider.style.setProperty("--slider-thumb-border-color", theme.primaryColor);
+    slider.style.setProperty("--slider-focus-track-color", theme.primaryColor);
+  }, [theme]);
+
   return (
     <div className="mb-4">
       <label className="block text-sm font-medium text-gray-700 mb-1.5">
@@ -34,7 +45,7 @@ const Slider: React.FC<SliderProps> = ({
           max={max}
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
-          className="custom-slider"  // Using the custom CSS class
+          className="custom-slider"
         />
       </div>
     </div>

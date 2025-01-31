@@ -10,6 +10,15 @@ export interface Theme {
   primaryColor: string;
   secondaryColor: string;
   fontFamily: string;
+  scoreRanges: {
+    [key: string]: {
+      min: number;
+      max: number;
+      color: string;
+    };
+  };
+  locale?: string; // e.g., "en-US", "fr-FR"
+  icons?: { logo: string };
 }
 
 export enum PaymentHistory {
