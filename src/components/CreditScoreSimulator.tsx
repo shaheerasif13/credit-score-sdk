@@ -61,7 +61,6 @@ const CreditScoreSimulator = () => {
           />
           <NumberInput
             label="New Credit Applications"
-            value={creditScoreInputs.newCreditApplications}
             min={0}
             onChange={(value) =>
               setCreditScoreInputs({
