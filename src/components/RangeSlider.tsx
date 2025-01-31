@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useTheme } from "../hooks/theme";
 
-interface SliderProps {
+interface RangeSliderProps {
   label: string;
   value: number;
   min: number;
@@ -10,7 +10,7 @@ interface SliderProps {
   unit?: string;
 }
 
-const Slider: React.FC<SliderProps> = ({
+const RangeSlider: React.FC<RangeSliderProps> = ({
   label,
   value,
   min,
@@ -52,4 +52,4 @@ const Slider: React.FC<SliderProps> = ({
   );
 };
 
-export default Slider;
+export default RangeSlider;

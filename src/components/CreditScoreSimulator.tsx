@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { CreditScoreInputs, PaymentHistory } from "../share/types";
 import { calculateCreditScore } from "../share/utils";
-import CreditScoreDisplay from "./credit-score-display";
-import ButtonToggle from "./button-toggle";
-import NumberInput from "./number-input";
-import Slider from "./slider";
+import CreditScoreDisplay from "./CreditScoreDisplay";
+import ButtonToggle from "./ButtonToggle";
+import NumberInput from "./NumberInput";
+import RangeSlider from "./RangeSlider";
 
 const CreditScoreSimulator = () => {
   const [creditScoreInputs, setCreditScoreInputs] = useState<CreditScoreInputs>(
@@ -32,7 +32,7 @@ const CreditScoreSimulator = () => {
         </h1>
         <CreditScoreDisplay score={creditScore} />
         <div className="space-y-6">
-          <Slider
+          <RangeSlider
             label="Credit Utilization"
             value={creditScoreInputs.creditUtilization}
             min={0}
@@ -70,7 +70,7 @@ const CreditScoreSimulator = () => {
               })
             }
           />
-          <Slider
+          <RangeSlider
             label="Credit Age"
             value={creditScoreInputs.creditAge}
             min={0}
@@ -83,7 +83,7 @@ const CreditScoreSimulator = () => {
             }
             unit="years"
           />
-          <Slider
+          <RangeSlider
             label="Debt-to-Income Ratio"
             value={creditScoreInputs.debtToIncomeRatio}
             min={0}
