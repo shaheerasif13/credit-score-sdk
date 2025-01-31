@@ -6,6 +6,7 @@ import PeerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
 import { dts } from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
 import babel from "@rollup/plugin-babel";
+import replace from "@rollup/plugin-replace";
 import packageJson from "./package.json";
 
 export default [
@@ -49,6 +50,10 @@ export default [
         babelHelpers: "bundled",
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       }),
+      replace({
+        preventAssignment: true,
+        "process.env.NODE_ENV": JSON.stringify("production"),
+      }),
     ],
     external: ["react", "react-dom"],
   },
@@ -89,6 +94,10 @@ export default [
         ],
         babelHelpers: "bundled",
         extensions: [".js", ".jsx", ".ts", ".tsx"],
+      }),
+      replace({
+        preventAssignment: true,
+        "process.env.NODE_ENV": JSON.stringify("production"),
       }),
     ],
     external: ["react", "react-dom"],
