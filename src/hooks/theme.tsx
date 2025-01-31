@@ -10,7 +10,7 @@ const defaultTheme: Theme = {
     Poor: { min: 300, max: 579, color: "#dc2626" }, // Red
     Fair: { min: 580, max: 669, color: "#f59e0b" }, // Orange
     Good: { min: 670, max: 739, color: "#10b981" }, // Green
-    VeryGood: { min: 740, max: 799, color: "#2563eb" }, // Blue
+    "Very Good": { min: 740, max: 799, color: "#2563eb" }, // Blue
     Excellent: { min: 800, max: 850, color: "#7c3aed" }, // Purple
   },
   locale: "en-US",

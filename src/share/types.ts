@@ -11,7 +11,7 @@ export interface Theme {
   secondaryColor: string;
   fontFamily: string;
   scoreRanges: { [key: string]: ScoreRange };
-  locale?: string; // e.g., "en-US", "fr-FR"
+  locale?: string;
   icon?: string | React.ReactNode;
 }
 

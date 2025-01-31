@@ -8,7 +8,7 @@ import RangeSlider from "./RangeSlider";
 import { useTheme } from "../hooks/theme";
 
 const CreditScoreSimulator = () => {
-  const { scoreRanges, icon } = useTheme();
+  const { scoreRanges, icon, fontFamily } = useTheme();
   const [creditScoreInputs, setCreditScoreInputs] = useState<CreditScoreInputs>(
     {
       creditUtilization: 0,
@@ -27,7 +27,7 @@ const CreditScoreSimulator = () => {
   }, [creditScoreInputs]);
 
   return (
-    <div className="min-h-screen bg-gray-200 flex items-center justify-center p-10">
+    <div className="min-h-screen bg-gray-200 flex items-center justify-center p-10" style={{fontFamily: fontFamily}}>
       <div className="bg-white rounded-3xl shadow-lg p-8 w-full max-w-lg">
         <div className="text-[28px] font-semibold text-center text-gray-800 mb-2 flex justify-center items-center gap-1">
           {typeof icon === "string" ? (
