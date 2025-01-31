@@ -108,5 +108,6 @@ export default [
     input: "src/index.ts",
     output: [{ file: packageJson.types }],
     plugins: [dts()],
+    external: [/\.(css|less|scss|sass)$/],
   },
 ];
