@@ -5,8 +5,10 @@ import CreditScoreDisplay from "./CreditScoreDisplay";
 import ButtonToggle from "./ButtonToggle";
 import NumberInput from "./NumberInput";
 import RangeSlider from "./RangeSlider";
+import { useTheme } from "../hooks/theme";
 
 const CreditScoreSimulator = () => {
+  const { scoreRanges } = useTheme();
   const [creditScoreInputs, setCreditScoreInputs] = useState<CreditScoreInputs>(
     {
       creditUtilization: 0,
@@ -17,11 +19,11 @@ const CreditScoreSimulator = () => {
     }
   );
   const [creditScore, setCreditScore] = useState<number>(
-    calculateCreditScore(creditScoreInputs)
+    calculateCreditScore(creditScoreInputs, scoreRanges)
   );
 
   useEffect(() => {
-    setCreditScore(calculateCreditScore(creditScoreInputs));
+    setCreditScore(calculateCreditScore(creditScoreInputs, scoreRanges));
   }, [creditScoreInputs]);
 
   return (
