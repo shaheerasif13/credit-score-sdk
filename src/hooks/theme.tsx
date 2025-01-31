@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import { Theme } from "../share/types";
+import { CircleStack } from "../components/icons";
 
 const defaultTheme: Theme = {
   primaryColor: "#6b7280",
@@ -13,6 +14,7 @@ const defaultTheme: Theme = {
     Excellent: { min: 800, max: 850, color: "#7c3aed" }, // Purple
   },
   locale: "en-US",
+  icon: <CircleStack className="w-7 h-7" style={{ color: "#6b7280" }} />,
 };
 
 const ThemeContext = createContext<Theme>(defaultTheme);

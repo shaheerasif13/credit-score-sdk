@@ -12,7 +12,7 @@ export interface Theme {
   fontFamily: string;
   scoreRanges: { [key: string]: ScoreRange };
   locale?: string; // e.g., "en-US", "fr-FR"
-  icons?: { logo: string };
+  icon?: string | React.ReactNode;
 }
 
 export interface ScoreRange {
