@@ -6,8 +6,7 @@ import PeerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
 import { dts } from "rollup-plugin-dts";
 import postcss from "rollup-plugin-postcss";
 import babel from "@rollup/plugin-babel";
-
-const packageJson = require("./package.json");
+import packageJson from "./package.json";
 
 export default [
   // Modern ESM + CJS Build
@@ -27,16 +26,21 @@ export default [
       PeerDepsExternalPlugin(),
       nodeResolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
-      postcss(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      postcss({
+        extract: packageJson.styles,
+        modules: false,
+        minimize: true,
+        plugins: [require("tailwindcss"), require("autoprefixer")],
+      }),
       babel({
         presets: [
           "@babel/preset-react",
           [
             "@babel/preset-env",
             {
-              targets: "> 0.25%, not dead", // Support modern browsers
+              targets: "> 0.25%, not dead",
               useBuiltIns: "entry",
               corejs: 3,
             },
@@ -55,7 +59,7 @@ export default [
     output: {
       file: packageJson.browser,
       format: "umd",
-      name: "CreditScoreSdk", // Global variable when loaded via <script>
+      name: "CreditScoreSdk",
       globals: {
         react: "React",
         "react-dom": "ReactDOM",
@@ -64,15 +68,20 @@ export default [
     plugins: [
       nodeResolve(),
       commonjs(),
-      typescript({ tsconfig: "./tsconfig.json" }),
       terser(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      postcss({
+        extract: packageJson.styles,
+        minimize: true,
+        plugins: [require("tailwindcss"), require("autoprefixer")],
+      }),
       babel({
         presets: [
           "@babel/preset-react",
           [
             "@babel/preset-env",
             {
-              targets: "defaults, ie 11", // Support older browsers (IE11+)
+              targets: "defaults, ie 11",
               useBuiltIns: "entry",
               corejs: 3,
             },
@@ -90,6 +99,5 @@ export default [
     input: "src/index.ts",
     output: [{ file: packageJson.types }],
     plugins: [dts()],
-    external: [/\.(css|less|scss|sass)$/],
   },
 ];
