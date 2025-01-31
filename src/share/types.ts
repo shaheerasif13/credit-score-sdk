@@ -10,7 +10,7 @@ export interface Theme {
   primaryColor: string;
   secondaryColor: string;
   fontFamily: string;
-  scoreRanges: { [key: string]: ScoreRange };
+  scoreRanges: ScoreRanges;
   locale?: string;
   icon?: string | React.ReactNode;
 }
@@ -19,6 +19,10 @@ export interface ScoreRange {
   min: number;
   max: number;
   color: string;
+}
+
+export interface ScoreRanges {
+  [key: string]: ScoreRange;
 }
 
 export enum PaymentHistory {
